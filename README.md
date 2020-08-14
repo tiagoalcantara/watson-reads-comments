@@ -9,15 +9,15 @@
 
 ## Como rodar?
 
-1. Clonar o projeto
+**1. Clonar o projeto**
 
 `git clone https://github.com/tiagoalcantara/watson-reads-comments.git`
 
-2. Instalar as dependências
+**2. Instalar as dependências**
 
 `yarn install`
 
-3. Configurar API da IBM
+**3. Configurar API da IBM**
 
   Pra rodar a aplicação você vai precisar de uma conta na [IBM Cloud](https://cloud.ibm.com/). Busque por Natural Language Understanding nos recursos, crie um novo recurso e copie os dados de acesso (API_KEY e URL).
   Dentro da pasta do projeto, crie uma pasta chamada `credentials` e dentro dela um arquivo `nlu.ts`, no seguinte formato:
@@ -32,7 +32,7 @@ const nluCredentials = {
 export default nluCredentials;
 ```
 
-4. Pronto! Agora basta rodar :)
+**4. Pronto! Agora basta rodar :)**
 
 `yarn dev`
 
