@@ -16,13 +16,13 @@ async function nluRobot(commentsAsOneString, createJsonFile = false) {
         text: commentsAsOneString,
         features: {
             entities: {
-                limit: 5,
+                limit: 3,
             },
             keywords: {
-                limit: 5,
+                limit: 3,
             },
             concepts: {
-                limit: 1,
+                limit: 3,
             },
         },
     };

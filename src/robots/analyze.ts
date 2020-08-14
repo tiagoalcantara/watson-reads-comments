@@ -4,17 +4,28 @@ function analyzeRobot(watsonAnalyses: IAnalyses): string {
     const response = `
 WATSON\n\n
 Parece que o vídeo escolhido está no idioma: ${watsonAnalyses.language}
-De forma geral, os comentários falam sobre: ${watsonAnalyses?.concepts[0]?.text}\n
+De forma geral, os comentários falam sobre: \n
+${getConcepts()}\n
 As palavras que achei mais relevantes foram:\n
 ${getKeyWords()}
-As principais entidades que encontrei foram:
+As principais entidades que encontrei foram:\n
 ${getEntities()}
     `;
 
     return response;
 
+    function getConcepts(): string {
+        let response = ``;
+
+        watsonAnalyses.concepts.forEach((concept) => {
+            response += `• ${concept.text}\n`;
+        });
+
+        return response;
+    }
+
     function getEntities(): string {
-        let response = '';
+        let response = ``;
 
         watsonAnalyses.entities.forEach((entity) => {
             let entityText = `"${entity.text}", que se categoriza como ${getEntityType(
@@ -56,6 +67,8 @@ ${getEntities()}
                 return 'Duração';
             case 'Location':
                 return 'Local';
+            case 'JobTitle':
+                return 'Profissão';
             default:
                 return type;
         }
