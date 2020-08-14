@@ -1,7 +1,6 @@
 {
   "name": "read-youtube-comments",
   "version": "1.0.0",
-  "bin": "dist/index.js",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
