@@ -1,6 +1,7 @@
 {
   "name": "read-youtube-comments",
   "version": "1.0.0",
+  "bin": "dist/index.js",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
@@ -16,8 +17,10 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "start": "tsnd ./src/index.ts",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet"
+    "dev": "tsnd --transpile-only --ignore-watch node_modules src/index.ts",
+    "start": "node dist/src/index.js",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "build": "tsc"
   },
   "dependencies": {
     "ibm-watson": "5.6.1",

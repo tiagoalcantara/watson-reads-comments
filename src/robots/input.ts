@@ -1,4 +1,4 @@
-import readline from 'readline-sync';
+import * as readline from 'readline-sync';
 
 function inputRobot(): string {
     const url = askForUrl();

@@ -1,19 +1,17 @@
-import nluCredentials from '../../credentials/nlu';
-import * as NaturalLanguageUnderstandingV1 from 'ibm-watson/natural-language-understanding/v1';
-import { IamAuthenticator } from 'ibm-watson/auth';
-
-import * as fs from 'fs';
-import IAnalyses from '../interfaces/analyses';
-
-async function nluRobot(commentsAsOneString: string, createJsonFile = false): Promise<IAnalyses> {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const nlu_1 = require("../../credentials/nlu");
+const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1");
+const auth_1 = require("ibm-watson/auth");
+const fs = require("fs");
+async function nluRobot(commentsAsOneString, createJsonFile = false) {
     const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
         version: '2018-11-16',
-        authenticator: new IamAuthenticator({
-            apikey: nluCredentials.API_KEY,
+        authenticator: new auth_1.IamAuthenticator({
+            apikey: nlu_1.default.API_KEY,
         }),
-        url: nluCredentials.API_URL,
+        url: nlu_1.default.API_URL,
     });
-
     const analyzeParams = {
         text: commentsAsOneString,
         features: {
@@ -28,25 +26,20 @@ async function nluRobot(commentsAsOneString: string, createJsonFile = false): Pr
             },
         },
     };
-
     console.log('[nluRobot] Iniciando análise...');
     try {
         const analysisResults = await naturalLanguageUnderstanding.analyze(analyzeParams);
-
         if (createJsonFile) {
             await fs.writeFile('analyses.json', JSON.stringify(analysisResults, null, 2), () => {
                 console.log("[nluRobot] Arquivo 'analyses.json' criado");
             });
         }
-
         console.log('[nluRobot] Finalizado com sucesso.');
-
-        return Promise.resolve(analysisResults.result as IAnalyses);
-    } catch (err) {
+        return Promise.resolve(analysisResults.result);
+    }
+    catch (err) {
         console.log('[nluRobot] Finalizado com falhas.');
-
         return Promise.reject(err);
     }
 }
-
-export default nluRobot;
+exports.default = nluRobot;
